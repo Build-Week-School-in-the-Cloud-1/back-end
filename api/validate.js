@@ -22,7 +22,7 @@ module.exports = {
     register: (req, res, next) => {
         const user = req.body;
 
-        if(!(user.fname && user.lname && user.email && user.username && user.password)) {
+        if(!(user.fname && user.lname && user.email && user.username && user.password && user.country && user.role)) {
             next({ code: 400, message: "Missing required data: First Name, Last Name, Email, Username, Password" });
         } else {
             next();

@@ -22,12 +22,10 @@ function findBy(filter) {
 }
 
 function findById(user) {
-    console.log("@ Findby ID",user)
     return db("users").where({id: user}).first();
 }
 
 async function register(user) {
-    console.log(user)
     const [id] = await db('users').insert(user).returning('id')
     return findById(id)
  }
@@ -37,7 +35,6 @@ function update(changes, id) {
 }
 
 function remove(user) {
-    console.log(user)
     return db("users").where({id: user}).del();
 }
 
