@@ -25,6 +25,15 @@ exports.up = function(knex) {
                 tbl.string("role_name", 30)
             })
 
+            .createTable("tasks", tbl => {
+                tbl.increments();
+                tbl.varchar("task_name", 128)
+                    .notNullable();
+                tbl.varchar("task_description", 128)
+                    .notNullable();
+                tbl.date("due_date",128)
+            })
+
             .createTable("volunteer_tasks", tbl => {
                 tbl.increments();
                 tbl.integer("user_id")
@@ -39,20 +48,13 @@ exports.up = function(knex) {
                     .onUpdate('CASCADE')
             })
 
-            .createTable("tasks", tbl => {
-                tbl.increments();
-                tbl.varchar("task_name", 128)
-                    .notNullable();
-                tbl.varchar("task_description", 128)
-                    .notNullable();
-                tbl.date("due_date",128)
-            })
+            
 };
 
 exports.down = function(knex) {
     return knex.schema
-            .dropTableIfExists("tasks")
             .dropTableIfExists("volunteer_tasks")
+            .dropTableIfExists("tasks")
             .dropTableIfExists("roles")
             .dropTableIfExists("users")
             
