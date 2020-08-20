@@ -61,6 +61,14 @@ function generateToken(user) {
     return jwt.sign(payload, secrets.jwtSecret, options);
 }
 
+router.put('/:id', validate.loggedon,(req,res)=>{
+    const { id } = req.params
+    const body = req.body
+    Users.update(body, id)
+        .then(changes => 
+            res.status(201).json(changes))
+})
+
 router.delete("/:id", (req,res)=>{
     const { id } = req.params
     Users.remove(id)

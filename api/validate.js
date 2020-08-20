@@ -1,5 +1,7 @@
 const Users = require("../users/users-model.js");
 const bcrypt = require("bcryptjs");
+const secrets = require('../config/secrets.js')
+const jwt = require('jsonwebtoken')
 
 module.exports = {
     user: (req, res, next) => {
@@ -45,12 +47,22 @@ module.exports = {
                 .catch(err => next({ code: 500, message: "Error retrieving user data", err }));
         }
     },
+    
     loggedon: (req, res, next) => {
-        const { id } = req.params;
-        if(req.jwt.subject === parseInt(id)) {
-            next();
-        } else {
-            next({ code: 403, message: "You can only edit/delete your own account" });
-        }
+        const {authorization} = req.headers;
+        const secret = secrets.jwtSecret ;
+
+    if (authorization){
+        jwt.verify(authorization, secret, (err, decodedToken) => {
+            if(err){
+                 res.status(401).json({ message: "You cannot edit this users information."})
+            } else {
+                req.decodedToken = decodedToken;
+                next();
+            }
+        })
+    } else {
+        res.status(401).json({ message: "You shall not pass."})
+    }
     }
 }
