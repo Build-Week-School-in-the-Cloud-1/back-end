@@ -36,7 +36,8 @@ function update(changes, id) {
     return db("users").where({ id: id }).update(changes).then(() => findById(id));
 }
 
-function remove(id) {
-    return db("users").where({id: id}).delete();
+function remove(user) {
+    console.log(user)
+    return db("users").where({id: user}).del();
 }
 

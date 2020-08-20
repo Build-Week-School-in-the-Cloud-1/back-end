@@ -61,13 +61,13 @@ function generateToken(user) {
     return jwt.sign(payload, secrets.jwtSecret, options);
 }
 
-router.get("/:id", (req,res, next) => {
-    const { id } = params
-    Users.findById(id)
-        .then(user => 
-            res.status(200).json(user))
-        .catch(err => 
-            res.status(500).json({error: "Could not get user", err}))
+router.delete("/:id", (req,res)=>{
+    const { id } = req.params
+    Users.remove(id)
+        .then(num =>
+            res.status(200).json({ message:`${num} member was deleted`}))
+        .catch(err =>
+            res.status(404).json({ errormessage: "This member was not deleted"}))
 })
 
 module.exports = router;
