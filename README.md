@@ -1,4 +1,4 @@
-# BackEnd Build Week API Starter
+# School in the Crowd API
 
 **This api is made to work with the project named above built by a team consisting of UI/UX Web, React FrontEnd, and Backend developers**
 
@@ -7,7 +7,7 @@
 ## Introduction
 <br>
 
-This api will provide the resources necessary on the React App to log in, out, and display data for users to use. The complete project is built
+This api will provide the resources necessary for a React App to log in, out, and display data for users to use. The complete project is built
 in a two week period where the team collaborates to get all essential items connected to each other to make one app for the user.
 
 **Make sure to add a .env file with at least the following:**
@@ -174,3 +174,72 @@ Does not receive or return JSON
 
 
 ___
+
+
+
+# Information about React App
+
+☝️ Proposal
+
+What problem does your app solve?
+Our app helps resolve issues with an overwhelming student body and lack of skilled teachers.
+Be as specific as possible; how does your app solve the problem?
+So we connect people with a wealth of knowledge in order to provide more efficient means of education.
+What is the mission statement?
+Streamline the process of connecting students with suitable mentors to enhance their learning experience in order to alleviate the issue of student to educator disparity.
+💡 Features
+
+What features are required for your minimum viable product?
+3 different onboarding processes for:
+Admins
+Volunteers
+Students
+Each one needs to have their own personalized UI experience.
+Admin will be able to make and edit training tasks for volunteers to complete.
+Saving a todo list to the volunteer’s homepage
+Homepage for students to see a register for all volunteers
+Search for volunteers by abilities or by country
+What features may you wish to put in a future release?
+Bitcoin Tipping system
+Volunteers can assign tasks to students individually or by group
+Institute a peer review system to rate volunteers
+What do the top 3 similar apps do for their users?
+iMentor helps high school students prep for their choice of university by offering extensive online preparatory work.
+iCouldBe finds mentors for US residents who are in need of a positive role model in order to better develop themselves as well-rounded adults.
+
+🛠 Frameworks - Libraries
+
+What 3rd party frameworks/libraries are you considering using?
+LESS
+Balsalmiq
+React
+Node
+Express
+SQLite
+Nodemon
+Json webtokens
+ Redux
+Localstorage
+Do the APIs you need require you to contact them to gain access?
+No
+Are you required to pay to use said API(s)?
+	Nope
+🎯 Target Audience
+
+Who is your target audience? Be specific.
+Parents
+Seniors looking for an opportunity to give back to the community.
+Kids who don’t have equal learning opportunities
+What feedback have you gotten from potential users?
+
+Have you validated this problem and your solution with a target audience? Describe how,
+
+🔑 Prototype Key Feature(s)
+
+How long do you think it will take to implement these features?
+Marketing page: 6 page
+Front-end: 1.5 weeks
+Back-end: 4 days for initial data-set
+Front-end supervisor: 4 days
+Do you anticipate working on stretch functionality after completion of a Minimal Viable Product?
+duh.
