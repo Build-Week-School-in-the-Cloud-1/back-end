@@ -70,4 +70,14 @@ router.delete("/:id", (req,res)=>{
             res.status(404).json({ errormessage: "This member was not deleted"}))
 })
 
+router.delete('/logout',(req, res) => {
+    console.log(token)
+    if (localStorage.getItem("token")) {
+        localStorage.removeItem("token");
+        res.status(200).json({message: 'You have been logged out'})
+      } else {
+          res.end()
+      }
+});
+
 module.exports = router;
