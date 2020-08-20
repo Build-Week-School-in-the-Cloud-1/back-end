@@ -28,13 +28,24 @@ router.post("/register",(req,res) => {
         })
   })
 
-router.post("/login", validate.login, (req, res, next) => {
-    const user = req.user;
-
-    const token = generateToken(user);
-    res.status(200).json({ user_id: user.id, username: user.username, token });
-
-});
+  router.post('/login', validate.login,(req,res) => {
+    const body = req.body
+    Users.asyncFindBy(body)
+        .then(user => {
+            console.log(user)
+            if(user && bcrypt.hashSync(body.password, user.password)){
+                const token = generateToken(user)
+                res.status(200).json({ message: `${body.username} is logged in!`,
+                    token
+                })
+            } else {
+                res.status(401).json({errormessage: "You shall not pass!"})
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ errormessage: "Could not get the user", err})
+        })
+  })
 
 function generateToken(user) {
     const payload = {
