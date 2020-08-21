@@ -1,26 +1,28 @@
 const db = require("../data/dbConfig.js");
 
 module.exports = {
-    findAll,
     assign,
+    findAll,
+    findById,
     edit,
     remove
 };
+
+async function assign(assignment) {
+    const [id] = await db("volunteer_tasks").insert(assignment).returning('id')
+    return findById(id)
+ }
 
 function findAll(){
     return db('volunteer_tasks')
 }
 
-function findById(id){
-    return db("volunteer_tasks").where({id:id})
+async function findById(assignmentId){
+    await db("volunteer_tasks").where({id:assignmentId}).first()
 }
 
-async function assign(task) {
-    const [id] = await db("volunteer_tasks").insert(task).returning('id')
-    return findById(id)
- }
+function edit(userId,changes) {
 
-function edit(changes, userId) {
     return db("volunteer_tasks").where({ id: userId }).update(changes)
         .then(() => findById(userId));
 }

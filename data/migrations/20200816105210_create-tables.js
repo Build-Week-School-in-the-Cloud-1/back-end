@@ -33,17 +33,20 @@ exports.up = function(knex) {
             })
 
             .createTable("volunteer_tasks", tbl => {
-                tbl.increments();
+                tbl.increments()
                 tbl.integer("user_id")
+                    .unsigned()
                     .references("users.id")
                     .notNullable()
                     .onDelete('CASCADE')
                     .onUpdate('CASCADE')
-                tbl.integer("task_id").notNullable()
+                tbl.integer("task_id")
+                    .unsigned()
                     .references("tasks.id")
                     .notNullable()
                     .onDelete('CASCADE')
                     .onUpdate('CASCADE')
+                
             })
 
             

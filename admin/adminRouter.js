@@ -17,19 +17,20 @@ router.get('/', (req,res)=> {
 router.post("/",(req,res) => {
     const body = req.body
     AM.assign(body)
-        .then(added => 
-            res.status(201).json(added))
+        .then(added => {
+            res.status(201).json(body)})
         .catch(err => {
-            res.status(500).json({errormessage: 'Creating a task for a voluteer failed.', err})
+            res.status(500).json({errormessage: 'Creating a task for a volunteer failed.', err})
         })
   })
 
   router.put('/:id', (req,res) => {
       const {id} = req.params;
       const body = req.body;
-    AM.edit(body)
-        .then(assignment => 
-            res.status(201).json(assignment))
+      console.log("body and id @ adminROuter", id, body)
+    AM.edit(id,body)
+        .then(assignment => {
+            res.status(201).json(body)})
         .catch(err => {
             res.status(500).json({ errormessage: "Could not edit the assignment", err})
         })

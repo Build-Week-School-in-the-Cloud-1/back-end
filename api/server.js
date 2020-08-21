@@ -4,7 +4,7 @@ const cors = require("cors");
 // const morgan = require("morgan");
 
 const adminRouter = require("../admin/adminRouter.js");
-const usersRouter = require("../users/usersRouter.js");
+const authRouter = require("../auth/authRouter.js");
 const tasksRouter =  require("../tasks/tasksRouter.js");
 const authenticate = require("../auth/authenticate.js");
 
@@ -16,7 +16,7 @@ server.use(express.json());
 
 server.use("/api/admin", adminRouter);
 server.use("/api/tasks", tasksRouter);
-server.use("/api/users", authenticate, usersRouter);
+server.use("/api/auth",  authRouter);
 
 server.get("/", (req, res) => res.json({api: "up"}));
 
