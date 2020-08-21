@@ -27,7 +27,6 @@ router.post("/",(req,res) => {
   router.put('/:id', (req,res) => {
       const {id} = req.params;
       const body = req.body;
-      console.log("body and id @ adminROuter", id, body)
     AM.edit(id,body)
         .then(assignment => {
             res.status(201).json(body)})
