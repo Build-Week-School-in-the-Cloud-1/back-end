@@ -18,11 +18,9 @@ exports.up = function(knex) {
                     .notNullable();
                 tbl.string("role", 128)
                     .notNullable();
-            })
-
-            .createTable("roles", tbl => {
-                tbl.increments()
-                tbl.string("role_name", 30)
+                tbl.varchar('bio', 300)
+                tbl.string('volunteer_time', 128)
+                tbl.string('student_time', 128)
             })
 
             .createTable("tasks", tbl => {
@@ -31,7 +29,7 @@ exports.up = function(knex) {
                     .notNullable();
                 tbl.varchar("task_description", 128)
                     .notNullable();
-                tbl.date("due_date",128)
+                tbl.boolean("completion", )
             })
 
             .createTable("volunteer_tasks", tbl => {
@@ -55,7 +53,6 @@ exports.down = function(knex) {
     return knex.schema
             .dropTableIfExists("volunteer_tasks")
             .dropTableIfExists("tasks")
-            .dropTableIfExists("roles")
             .dropTableIfExists("users")
             
 };
