@@ -51,6 +51,7 @@ function generateToken(user) {
     const payload = {
         subject: user.id,
         username: user.username,
+        role: user.role,
         created_at: Date.now()
     };
 
@@ -69,7 +70,7 @@ router.put('/:id', validate.loggedon,(req,res)=>{
             res.status(201).json(changes))
 })
 
-router.delete("/:id", (req,res)=>{
+router.delete("/:id", validate.loggedon, (req,res)=>{
     const { id } = req.params
     Users.remove(id)
         .then(num =>

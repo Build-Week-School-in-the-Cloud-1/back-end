@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const validate = require('../api/validateRole.js')
 // const bcrypt = require("bcryptjs");
 // const jwt = require("jsonwebtoken");
 // const secrets = require("../config/secrets.js");
@@ -6,7 +7,7 @@ const router = require("express").Router();
 const AM = require("./adminModel.js");
 // const validate = require("../api/validate.js");
 
-router.get('/', (req,res)=> {
+router.get('/', validate.admin, (req,res)=> {
     AM.findAll()
         .then(assignments =>
             res.status(201).json(assignments))
