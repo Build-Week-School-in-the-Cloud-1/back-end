@@ -14,8 +14,8 @@ server.use(cors());
 // server.use(morgan("dev"));
 server.use(express.json());
 
-server.use("/api/admin", authenticate, adminRouter);
-server.use("/api/tasks", authenticate, tasksRouter);
+server.use("/api/admin",  adminRouter);
+server.use("/api/tasks",  tasksRouter);
 server.use("/api/auth",  authRouter);
 
 server.get("/", (req, res) => res.json({api: "up"}));
