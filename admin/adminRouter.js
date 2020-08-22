@@ -19,7 +19,7 @@ router.post("/",(req,res) => {
     const body = req.body
     AM.assign(body)
         .then(added => {
-            res.status(201).json(body)})
+            res.status(201).json(added[0])})
         .catch(err => {
             res.status(500).json({errormessage: 'Creating a task for a volunteer failed.', err})
         })

@@ -8,9 +8,9 @@ module.exports = {
     remove
 };
 
-async function assign(assignment) {
-    const [id] = await db("volunteer_tasks").insert(assignment).returning('id')
-    return findById(id)
+ function assign(assignment) {
+    return db("volunteer_tasks").insert(assignment).returning('id')
+    
  }
 
 function findAll(){
