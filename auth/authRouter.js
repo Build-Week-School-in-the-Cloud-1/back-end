@@ -13,6 +13,7 @@ router.post("/register",validate.register,(req,res) => {
     creds.password = hash
     Users.register(creds)
         .then(added => {
+            console.log(added)
             if(added && bcrypt.hashSync(creds.password, added.password)){
                 const token = generateToken(added)
                 // req.session.added = added;
@@ -34,7 +35,7 @@ router.post("/register",validate.register,(req,res) => {
         .then(user => {
             if(user && bcrypt.hashSync(body.password, user.password)){
                 const token = generateToken(user)
-                res.status(200).json({ message: `${body.username} is logged in!`,
+                res.status(200).json({ message: "You are logged in!",
                     token, user
                 })
             } else {

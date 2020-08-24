@@ -17,8 +17,8 @@ function findByEmail(filter) {
     return db("users").where({email:filter}).first();
 }
 
-async function findById(user) {
-     await await db("users").where({id: user});
+function findById(user) {
+    return db("users").where({id: user});
 }
 
 async function register(user) {
