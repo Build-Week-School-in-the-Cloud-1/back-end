@@ -17,7 +17,7 @@ router.post("/register",validate.register,(req,res) => {
                 const token = generateToken(added)
                 // req.session.added = added;
                 res.status(200).json({ message: `${added.username} is logged in!`,
-                    token
+                    token, added
                 })
             } else {
                 res.status(401).json({errormessage: "You shall not pass!"})

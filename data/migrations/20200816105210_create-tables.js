@@ -55,6 +55,7 @@ exports.up = function(knex) {
 exports.down = function(knex) {
     return knex.schema
             .dropTableIfExists("volunteer_tasks")
+            .dropTableIfExists("roles")
             .dropTableIfExists("tasks")
             .dropTableIfExists("users")
             
