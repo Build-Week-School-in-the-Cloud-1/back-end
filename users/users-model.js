@@ -1,9 +1,9 @@
 const db = require("../data/dbConfig.js");
+const { restart } = require("nodemon");
 
 module.exports = {
     findAll,
-    findBy,
-    asyncFindBy,
+    findByEmail,
     findById,
     register,
     update,
@@ -14,15 +14,16 @@ function findAll() {
     return db("users");
 }
 
-function findBy(filter) {
-    return db("users").where(filter).first();
+function findByEmail(filter) {
+    return db("users").where({email:filter}).first();
 }
- function asyncFindBy(filtered){
-    return db('users').where(filtered)
-}
+// function asyncFindBy(emailAdd){
+//     return db('users').where({email:emailAdd})
+// }
 
-function findById(user) {
-    return db("users").where({id: user}).first();
+async function findById(user) {
+    console.log(user)
+     await await db("users").where({id: user});
 }
 
 async function register(user) {

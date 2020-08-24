@@ -30,18 +30,18 @@ module.exports = {
     },
     
     login: (req, res, next) => {
-        const {username, password } = req.body;
+        const {email, password } = req.body;
 
-        if(!(username && password)) {
-            next({ code: 400, message: "Missing required data: Username, Password" });
+        if(!(email && password)) {
+            next({ code: 400, message: "Missing required data: Email, Password" });
         } else {
-            Users.findBy({ username })
+            Users.findByEmail(email)
                 .then(user => {
                     if(user && bcrypt.compareSync(password, user.password)){
                         req.user = user;
                         next();
                     } else {
-                        next({ code: 401, message: "Username and/or Password incorrect!" });
+                        next({ code: 401, message: "Email and/or Password incorrect!" });
                     }
                 })
                 .catch(err => next({ code: 500, message: "Error retrieving user data", err }));

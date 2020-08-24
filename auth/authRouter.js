@@ -30,13 +30,12 @@ router.post("/register",validate.register,(req,res) => {
 
   router.post('/login', validate.login,(req,res) => {
     const body = req.body
-    Users.asyncFindBy(body)
+    Users.findByEmail(body.email)
         .then(user => {
-            console.log(user)
             if(user && bcrypt.hashSync(body.password, user.password)){
                 const token = generateToken(user)
                 res.status(200).json({ message: `${body.username} is logged in!`,
-                    token
+                    token, user
                 })
             } else {
                 res.status(401).json({errormessage: "You shall not pass!"})
