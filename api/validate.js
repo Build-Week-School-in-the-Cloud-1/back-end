@@ -51,8 +51,11 @@ module.exports = {
     loggedon: (req, res, next) => {
         const {authorization} = req.headers;
         const secret = secrets.jwtSecret ;
-    if (authorization){
-        jwt.verify(authorization, secret, (err, decodedToken) => {
+
+        const [authType, token] = req.headers.authorization.split(" ");
+
+    if (authType && token){
+        jwt.verify(token, secret, (err, decodedToken) => {
             if(err){
                  res.status(401).json({ message: "You cannot edit this users information."})
             } else {
@@ -61,6 +64,6 @@ module.exports = {
             }
         })
     } else {
-        res.status(401).json({ message: "You shall not pass."})
+        res.status(401).json({ message: "You do not have the proper credentials to edit this user."})
     }}
 }
