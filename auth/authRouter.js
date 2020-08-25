@@ -88,4 +88,11 @@ router.get('/logout', validate.loggedon,(req, res) => {
       }
 });
 
+router.get('/', (req,res)=> {
+    Users.findAll()
+        .then(users => {
+            res.status(201).json(users)
+        })
+})
+
 module.exports = router;
