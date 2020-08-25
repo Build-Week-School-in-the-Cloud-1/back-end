@@ -24,7 +24,7 @@ function findById(user) {
 async function register(user) {
     const [id] = await db('users').insert(user).returning('id')
     return findById(id)
- }
+}
 
 function update(changes, id) {
     return db("users").where({ id: id }).update(changes).then(() => findById(id));

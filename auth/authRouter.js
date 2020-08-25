@@ -27,9 +27,9 @@ router.post("/register",validate.register,(req,res) => {
         .catch(err => {
             res.status(500).json({message: 'You did not create a user'})
         })
-  })
+});
 
-  router.post('/login', validate.login,(req,res) => {
+router.post('/login', validate.login,(req,res) => {
     const body = req.body
     Users.findByEmail(body.email)
         .then(user => {
@@ -45,7 +45,7 @@ router.post("/register",validate.register,(req,res) => {
         .catch(err => {
             res.status(500).json({ errormessage: "Could not get the user", err})
         })
-  })
+});
 
 function generateToken(user) {
     const payload = {
@@ -60,7 +60,7 @@ function generateToken(user) {
     };
 
     return jwt.sign(payload, secrets.jwtSecret, options);
-}
+};
 
 router.put('/:id', validate.loggedon,(req,res)=>{
     const { id } = req.params
@@ -68,7 +68,7 @@ router.put('/:id', validate.loggedon,(req,res)=>{
     Users.update(body, id)
         .then(changes => 
             res.status(201).json(changes))
-})
+});
 
 router.delete("/:id", validate.loggedon, (req,res)=>{
     const { id } = req.params
@@ -77,7 +77,7 @@ router.delete("/:id", validate.loggedon, (req,res)=>{
             res.status(200).json({ message:`${num} member was deleted`}))
         .catch(err =>
             res.status(404).json({ errormessage: "This member was not deleted"}))
-})
+});
 
 router.get('/logout', validate.loggedon,(req, res) => {
     if (localStorage.getItem("token")) {

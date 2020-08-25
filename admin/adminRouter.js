@@ -13,7 +13,7 @@ router.get('/', validate.admin, (req,res)=> {
             res.status(201).json(assignments))
         .catch(err => 
             res.status(500).json({ errormessage: "Error retrieving assignments", err }));
-})
+});
 
 router.post("/",(req,res) => {
     const body = req.body
@@ -24,18 +24,18 @@ router.post("/",(req,res) => {
         .catch(err => {
             res.status(500).json({errormessage: 'Creating a task for a volunteer failed.', err})
         })
-  })
+});
 
-  router.put('/:id', (req,res) => {
-      const {id} = req.params;
-      const body = req.body;
+router.put('/:id', (req,res) => {
+    const {id} = req.params;
+    const body = req.body;
     AM.edit(id,body)
         .then(assignment => {
             res.status(201).json(body)})
         .catch(err => {
             res.status(500).json({ errormessage: "Could not edit the assignment", err})
-        })
-  })
+    })
+});
 
 router.delete("/:id", (req,res)=>{
     const { id } = req.params
@@ -44,7 +44,7 @@ router.delete("/:id", (req,res)=>{
             res.status(200).json({ message:`${num} assignment was deleted`}))
         .catch(err =>
             res.status(404).json({ errormessage: "This asssignment was not deleted"}))
-})
+});
 
 
 
