@@ -51,7 +51,6 @@ module.exports = {
     loggedon: (req, res, next) => {
         const {authorization} = req.headers;
         const secret = secrets.jwtSecret ;
-
     if (authorization){
         jwt.verify(authorization, secret, (err, decodedToken) => {
             if(err){

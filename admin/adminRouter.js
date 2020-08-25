@@ -15,7 +15,7 @@ router.get('/', validate.admin, (req,res)=> {
             res.status(500).json({ errormessage: "Error retrieving assignments", err }));
 });
 
-router.post("/",(req,res) => {
+router.post("/", validate.admin,(req,res) => {
     const body = req.body
     AM.assign(body)
         .then(added => {
@@ -26,7 +26,7 @@ router.post("/",(req,res) => {
         })
 });
 
-router.put('/:id', (req,res) => {
+router.put('/:id', validate.admin, (req,res) => {
     const {id} = req.params;
     const body = req.body;
     AM.edit(id,body)
@@ -37,7 +37,7 @@ router.put('/:id', (req,res) => {
     })
 });
 
-router.delete("/:id", (req,res)=>{
+router.delete("/:id", validate.admin, (req,res)=>{
     const { id } = req.params
     AM.remove(id)
         .then(num =>

@@ -13,11 +13,10 @@ router.post("/register",validate.register,(req,res) => {
     creds.password = hash
     Users.register(creds)
         .then(added => {
-            console.log(added)
             if(added && bcrypt.hashSync(creds.password, added.password)){
                 const token = generateToken(added)
                 // req.session.added = added;
-                res.status(200).json({ message: `${added.username} is logged in!`,
+                res.status(200).json({ message: `${creds.username} is logged in!`,
                     token, added
                 })
             } else {
@@ -77,15 +76,6 @@ router.delete("/:id", validate.loggedon, (req,res)=>{
             res.status(200).json({ message:`${num} member was deleted`}))
         .catch(err =>
             res.status(404).json({ errormessage: "This member was not deleted"}))
-});
-
-router.get('/logout', validate.loggedon,(req, res) => {
-    if (localStorage.getItem("token")) {
-        localStorage.removeItem("token");
-        res.status(200).json({message: 'You have been logged out'})
-      } else {
-          res.end()
-      }
 });
 
 router.get('/', (req,res)=> {
