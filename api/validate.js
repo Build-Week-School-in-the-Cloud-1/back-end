@@ -49,7 +49,6 @@ module.exports = {
     },
     
     loggedon: (req, res, next) => {
-        const {authorization} = req.headers;
         const secret = secrets.jwtSecret ;
 
         const [authType, token] = req.headers.authorization.split(" ");

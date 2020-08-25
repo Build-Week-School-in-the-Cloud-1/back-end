@@ -78,11 +78,5 @@ router.delete("/:id", validate.loggedon, (req,res)=>{
             res.status(404).json({ errormessage: "This member was not deleted"}))
 });
 
-router.get('/', (req,res)=> {
-    Users.findAll()
-        .then(users => {
-            res.status(201).json(users)
-        })
-})
 
 module.exports = router;

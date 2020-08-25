@@ -1,11 +1,9 @@
 const router = require("express").Router();
 const validate = require('../api/validateRole.js')
-// const bcrypt = require("bcryptjs");
-// const jwt = require("jsonwebtoken");
-// const secrets = require("../config/secrets.js");
+const getValid = require('../api/validateRole')
 
+const Users = require('../users/users-model')
 const AM = require("./adminModel.js");
-// const validate = require("../api/validate.js");
 
 router.get('/', validate.admin, (req,res)=> {
     AM.findAll()
@@ -14,6 +12,13 @@ router.get('/', validate.admin, (req,res)=> {
         .catch(err => 
             res.status(500).json({ errormessage: "Error retrieving assignments", err }));
 });
+
+router.get('/users', getValid.admin,(req,res)=> {
+    Users.findAll()
+        .then(users => {
+            res.status(201).json(users)
+        })
+})
 
 router.post("/", validate.admin,(req,res) => {
     const body = req.body
