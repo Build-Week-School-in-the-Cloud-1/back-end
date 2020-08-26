@@ -34,7 +34,7 @@ exports.up = function(knex) {
             })
 
             .createTable("volunteer_tasks", tbl => {
-                tbl.increments().defaultTo(knex.raw('TRUNCATE TABLE users, tasks RESTART IDENTITY CASCADE'));
+                tbl.increments();
                 tbl.integer("user_id")
                     .unsigned()
                     .references("users.id")
