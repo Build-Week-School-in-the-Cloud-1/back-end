@@ -18,10 +18,10 @@ exports.up = function(knex) {
                     .notNullable();
                 tbl.string("role", 128)
                     .notNullable();
-                tbl.varchar('bio', 300)
-                tbl.string('skill', 30)
-                tbl.string('volunteer_time', 128)
-                tbl.string('student_time', 128)
+                tbl.varchar('bio', 300);
+                tbl.string('skill', 30);
+                tbl.string('volunteer_time', 128);
+                tbl.string('student_time', 128);
             })
 
             .createTable("tasks", tbl => {
@@ -30,23 +30,23 @@ exports.up = function(knex) {
                     .notNullable();
                 tbl.varchar("task_description", 128)
                     .notNullable();
-                tbl.boolean("completion", )
+                tbl.boolean("completion", );
             })
 
             .createTable("volunteer_tasks", tbl => {
-                tbl.increments()
+                tbl.increments().defaultTo(knex.raw('TRUNCATE TABLE users, tasks RESTART IDENTITY CASCADE'));
                 tbl.integer("user_id")
                     .unsigned()
                     .references("users.id")
                     .notNullable()
                     .onDelete('CASCADE')
-                    .onUpdate('CASCADE')
+                    .onUpdate('CASCADE');
                 tbl.integer("task_id")
                     .unsigned()
                     .references("tasks.id")
                     .notNullable()
                     .onDelete('CASCADE')
-                    .onUpdate('CASCADE')
+                    .onUpdate('CASCADE');
                 
             })
 
