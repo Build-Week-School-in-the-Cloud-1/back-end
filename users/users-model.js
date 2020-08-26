@@ -6,6 +6,7 @@ module.exports = {
     findById,
     register,
     update,
+    search,
     remove
 };
 
@@ -32,5 +33,11 @@ function update(changes, id) {
 
 function remove(user) {
     return db("users").where({id: user}).del();
+}
+
+function search(query) {
+    const userRole = query.role
+    const userSkill = query.skill
+    return db('users').where({role: userRole, skill: userSkill})
 }
 

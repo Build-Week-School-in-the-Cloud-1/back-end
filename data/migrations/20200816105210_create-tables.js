@@ -19,6 +19,7 @@ exports.up = function(knex) {
                 tbl.string("role", 128)
                     .notNullable();
                 tbl.varchar('bio', 300)
+                tbl.string('skill', 30)
                 tbl.string('volunteer_time', 128)
                 tbl.string('student_time', 128)
             })

@@ -78,5 +78,12 @@ router.delete("/:id", /*validate.loggedon,*/ (req,res)=>{
             res.status(404).json({ errormessage: "This member was not deleted"}))
 });
 
+router.get('/search', (req,res)=> {
+    const body = req.body
+    Users.search(body)
+        .then(volunteers =>{
+            res.status(201).json(volunteers)})
+})
+
 
 module.exports = router;
