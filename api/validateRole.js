@@ -15,9 +15,4 @@ module.exports = {
     volunteer: (req, res, next) => {   
         next();
     },
-    
-    student: (req, res, next) => {
-        next();
-    },
- 
 }

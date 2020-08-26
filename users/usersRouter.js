@@ -9,7 +9,7 @@ router.get("/:id", (req, res, next) => {
     res.status(200).json(user);
 });
 
-router.put("/:id", validate.loggedon, (req, res, next) => {
+router.put("/:id", /*validate.loggedon,*/ (req, res, next) => {
     const { id } = req.params;
     const changes = req.body;
     changes.id = id;
@@ -21,7 +21,7 @@ router.put("/:id", validate.loggedon, (req, res, next) => {
         .catch(err => next({ code: 500, message: "Error updating user data", err }));
 });
 
-router.delete("/:id", validate.loggedon, (req, res, next) => {
+router.delete("/:id", /*validate.loggedon,*/ (req, res, next) => {
     const { id } = req.params;
 
     Users.remove(id)
