@@ -38,6 +38,7 @@ function remove(user) {
 function search(query) {
     const userRole = query.role
     const userSkill = query.skill
-    return db('users').where({role: userRole, skill: userSkill})
+    const userCountry = query.country
+    return db('users').where({role: userRole, skill: userSkill, country: userCountry})
 }
 
