@@ -1,7 +1,7 @@
 
 exports.seed = function(knex) {
-  return knex('volunteer_tasks').truncate()
-    .then(function () {
+  // return knex('volunteer_tasks').truncate()
+  //   .then(function () {
       return knex('volunteer_tasks').insert([
         {
           "user_id":"1",
@@ -16,5 +16,5 @@ exports.seed = function(knex) {
           "task_id":"1"
         }
       ]);
-    });
+    // });
 };

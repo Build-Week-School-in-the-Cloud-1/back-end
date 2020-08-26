@@ -1,7 +1,7 @@
 
 exports.seed = function(knex) {
-  return knex('tasks').truncate()
-    .then(function () {
+  // return knex('tasks').truncate()
+  //   .then(function () {
       return knex('tasks').insert([
         {
           "task_name": "Be awesome at everything",
@@ -19,5 +19,5 @@ exports.seed = function(knex) {
           "completion": false
         }
       ]);
-    });
+    // });
 };
