@@ -3,11 +3,17 @@ const server = require("../api/server.js");
 const db = require("../data/dbConfig.js");
 
 const testUser = {
-    fname: "Test",
-    lname: "Tester",
-    email: "tester@testing.com",
-    username: "tester",
-    password: "1234"
+    fname:"Todd",
+    lname: "Job",
+    email: "Toddd@gmail.com",
+    password: "jhgcjhgvk",
+    username: "Tod420",
+    country: "America",
+    role: "Volunteer",
+    skill: "math",
+    bio:";lskdjf;lksajdf;lkjasd;flkjasd;lkfj;asdlkjf;",
+    volunteer_time:"time",
+    student_time: "time"
 };
 
 describe("Auth Router", () => {
@@ -35,7 +41,7 @@ describe("Auth Router", () => {
         let res = {};
         beforeAll(async () => {
             res = await request(server).post("/api/auth/login")
-                            .send({username: testUser.username, password: testUser.password});
+                            .send({email: testUser.email, password: testUser.password});
         });
 
         test("should return status 200 OK", () => {
@@ -48,6 +54,61 @@ describe("Auth Router", () => {
 
         
     });
+
+    describe("Put /api/auth/:id", () => {
+        let res = {};
+        beforeAll(async () => {
+            res = await request(server).put("/api/auth/:id")
+                            .send({
+                                fname: testUser.fname,
+                                lname: testUser.lname,
+                                email: testUser.email,
+                                password: testUser.password,
+                                username: testUser.username,
+                                country: testUser.country,
+                                role: testUser.role,
+                                skill: testUser.skill,
+                                bio: testUser.bio,
+                                volunteer_time: testUser.volunteer_time,
+                                student_time: testUser.student_time
+                            });
+        });
+
+        test("should return status 200 OK", () => {
+            expect(res.status).toBe(201);
+        });   
+    })
+
+    describe("Delete /api/auth/:id", () => {
+        let res = {};
+        beforeAll(async () => {
+            await request(server).post("/api/auth/register")
+                            .send(testUser);
+            res = await request(server).del(`/api/auth/:${1}`);
+        });
+
+        test("should return status 200 OK", () => {
+            expect(res.status).toBe(200);
+        });   
+    })
+
+    describe("Get /api/auth/search", () => {
+        let res = {};
+        beforeAll(async () => {
+            await request(server).post("/api/auth/register")
+                            .send(testUser);
+            res = await request(server).get("/api/auth/search").send({
+                role:"Volunteer",
+                skill: "math",
+                country: "America"
+            });
+        });
+
+        test("should return status 200 OK", () => {
+            expect(res.status).toBe(201);
+        });   
+    })
+
 
     it("cleans out the users table", async () => {
         await db("users").truncate();

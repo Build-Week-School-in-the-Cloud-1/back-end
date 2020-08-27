@@ -16,7 +16,7 @@ router.post("/register",/*validate.register,*/(req,res) => {
             if(added && bcrypt.hashSync(creds.password, added.password)){
                 const token = generateToken(added)
                 const user = added[0]
-                res.status(200).json({ message: `${creds.username} is logged in!`,
+                res.status(201).json({ message: `${creds.username} is logged in!`,
                     token, user
                 })
             } else {

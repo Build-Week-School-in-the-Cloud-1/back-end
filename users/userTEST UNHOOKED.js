@@ -1,19 +1,25 @@
 const request = require("supertest");
 const server = require("../api/server.js");
-const db = require("../data/dbConfig.js");
+const db = require("./users-model");
 
 const testUser = {
-    fname: "Test",
-    lname: "Tester",
-    email: "tester@testing.com",
-    username: "tester",
-    password: "1234"
+    fname:"Todd",
+    lname: "Job",
+    email: "Toddd@gmail.com",
+    password: "jhgcjhgvk",
+    username: "Tod420",
+    country: "America",
+    role: "Volunteer",
+    skill: "math",
+    bio:";lskdjf;lksajdf;lkjasd;flkjasd;lkfj;asdlkjf;",
+    volunteer_time:"time",
+    student_time: "time"
 }
 let token = null;
 
-describe("Users Router", () => {
+describe("Users Model", async () => {
     it("cleans the users table", async () => {
-        await db("users").truncate();
+         db("users").truncate();
     });
     
     it("creates test user", async () => {
