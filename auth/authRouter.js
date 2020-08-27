@@ -15,9 +15,9 @@ router.post("/register",/*validate.register,*/(req,res) => {
         .then(added => {
             if(added && bcrypt.hashSync(creds.password, added.password)){
                 const token = generateToken(added)
-                // req.session.added = added;
+                const user = added[0]
                 res.status(200).json({ message: `${creds.username} is logged in!`,
-                    token, added
+                    token, user
                 })
             } else {
                 res.status(401).json({errormessage: "You shall not pass!"})
