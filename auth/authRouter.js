@@ -7,7 +7,7 @@ const Users = require("../users/users-model.js");
 const validate = require("../api/validate.js");
 
 
-router.post("/register",/*validate.register,*/(req,res) => {
+router.post("/register",validate.register,(req,res) => {
     const creds = req.body
     const hash = bcrypt.hashSync(creds.password, 14)
     creds.password = hash
@@ -28,7 +28,7 @@ router.post("/register",/*validate.register,*/(req,res) => {
         })
 });
 
-router.post('/login', /*validate.login,*/(req,res) => {
+router.post('/login', validate.login,(req,res) => {
     const body = req.body
     Users.findByEmail(body.email)
         .then(user => {
@@ -61,7 +61,7 @@ function generateToken(user) {
     return jwt.sign(payload, secrets.jwtSecret, options);
 };
 
-router.put('/:id', /*validate.loggedon,*/(req,res)=>{
+router.put('/:id', validate.loggedon,(req,res)=>{
     const { id } = req.params
     const body = req.body
     Users.update(body, id)
@@ -69,7 +69,7 @@ router.put('/:id', /*validate.loggedon,*/(req,res)=>{
             res.status(201).json(changes))
 });
 
-router.delete("/:id", /*validate.loggedon,*/ (req,res)=>{
+router.delete("/:id", validate.loggedon, (req,res)=>{
     const { id } = req.params
     Users.remove(id)
         .then(num =>

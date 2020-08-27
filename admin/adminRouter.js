@@ -5,7 +5,7 @@ const getValid = require('../api/validateRole')
 const Users = require('../users/users-model')
 const AM = require("./adminModel.js");
 
-router.get('/', /*validate.admin,*/ (req,res)=> {
+router.get('/', validate.admin, (req,res)=> {
     AM.findAll()
         .then(assignments =>
             res.status(201).json(assignments))
@@ -13,14 +13,14 @@ router.get('/', /*validate.admin,*/ (req,res)=> {
             res.status(500).json({ errormessage: "Error retrieving assignments", err }));
 });
 
-router.get('/users', /*getValid.admin,*/(req,res)=> {
+router.get('/users', getValid.admin,(req,res)=> {
     Users.findAll()
         .then(users => {
             res.status(201).json(users)
         })
 })
 
-router.post("/", /*validate.admin,*/(req,res) => {
+router.post("/", validate.admin,(req,res) => {
     const body = req.body
     AM.assign(body)
         .then(added => {
@@ -31,7 +31,7 @@ router.post("/", /*validate.admin,*/(req,res) => {
         })
 });
 
-router.put('/:id', /*validate.admin,*/ (req,res) => {
+router.put('/:id', validate.admin, (req,res) => {
     const {id} = req.params;
     const body = req.body;
     AM.edit(id,body)
@@ -42,7 +42,7 @@ router.put('/:id', /*validate.admin,*/ (req,res) => {
     })
 });
 
-router.delete("/:id", /*validate.admin,*/ (req,res)=>{
+router.delete("/:id", validate.admin, (req,res)=>{
     const { id } = req.params
     AM.remove(id)
         .then(num =>
