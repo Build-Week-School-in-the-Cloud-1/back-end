@@ -58,7 +58,7 @@ describe("Auth Router", () => {
     describe("Put /api/auth/:id", () => {
         let res = {};
         beforeAll(async () => {
-            res = await request(server).put("/api/auth/:id")
+            res = await request(server).put("/api/auth/:id").where({id: 0})
                             .send({
                                 fname: testUser.fname,
                                 lname: testUser.lname,

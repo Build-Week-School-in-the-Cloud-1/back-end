@@ -6,7 +6,7 @@ const router = require("express").Router();
 const TM = require("./tasksModel.js");
 const validate = require("../api/validateRole");
 
-router.get('/', validate.admin,(req,res)=> {
+router.get('/', /*validate.admin,*/(req,res)=> {
     TM.findAll()
         .then(tasks =>
             res.status(201).json(tasks))
@@ -14,7 +14,7 @@ router.get('/', validate.admin,(req,res)=> {
             res.status(500).json({ errormessage: "Error retrieving tasks", err }));
 });
 
-router.post("/", validate.admin,(req,res) => {
+router.post("/", /*validate.admin,*/(req,res) => {
     const body = req.body
     TM.addTask(body)
         .then(added => {
@@ -24,7 +24,7 @@ router.post("/", validate.admin,(req,res) => {
         })
 });
 
-router.put('/:id', validate.admin,(req,res) => {
+router.put('/:id', /*validate.admin,*/(req,res) => {
     const {id} = req.params;
     const body = req.body;
     TM.editTask(id, body)
@@ -35,7 +35,7 @@ router.put('/:id', validate.admin,(req,res) => {
         })
 });
 
-router.delete("/:id", validate.admin,(req,res)=>{
+router.delete("/:id", /*validate.admin,*/(req,res)=>{
     const { id } = req.params
     TM.removeTask(id)
         .then(num =>
