@@ -20,28 +20,38 @@ describe("Auth Router", () => {
     it("cleans the users table", async () => {
         await db("users").truncate();
     });
-    
-    describe("POST /api/auth/register", () => {
-        let res = {};
+
+    let res = {};
+    let id = null;
+    let token = '';
+
+    describe('POST /api/auth/register', () => {
         beforeAll(async () => {
-            res = await request(server).post("/api/auth/register")
-                            .send(testUser);
+          res = await request(server)
+            .post('/api/auth/register')
+            .set('Authorization', `Bearer ${token}`)
+            .send(testUser);
+
+            token = res.body.token;
+            id = res.body.user.id
+        });
+    
+        it('should return 200', () => {
+          expect(res.status).toBe(201);
+        });
+    
+        it('should return a JSON object', () => {
+          expect(res.type).toBe('application/json');
         });
 
-        test("should return status 201 Created", () => {
-            expect(res.status).toBe(201);
-        });
-
-        test("should return object a token property", () => {
-            expect(res.body).toHaveProperty("token");
-        });
-    });
+      });
 
     describe("POST /api/auth/login", () => {
-        let res = {};
         beforeAll(async () => {
+          
             res = await request(server).post("/api/auth/login")
-                            .send({email: testUser.email, password: testUser.password});
+                .set('Authorization', `Bearer ${token}`)
+                .send({email: testUser.email, password: testUser.password});
         });
 
         test("should return status 200 OK", () => {
@@ -55,40 +65,35 @@ describe("Auth Router", () => {
         
     });
 
-    describe("Put /api/auth/:id", () => {
-        let res = {};
-        beforeAll(async () => {
-            res = await request(server).put("/api/auth/0").send({
-                                fname: testUser.fname,
-                                lname: testUser.lname,
-                                email: testUser.email,
-                                password: testUser.password,
-                                username: "different username",
-                                country: testUser.country,
-                                role: testUser.role,
-                                skill: testUser.skill,
-                                bio: testUser.bio,
-                                volunteer_time: testUser.volunteer_time,
-                                student_time: testUser.student_time
-                            });
+    describe('PUT /api/auth/:id', () => {
+        beforeAll(async () => {    
+        const newUser = await request(server)
+            
+          res = await request(server)
+                .put(`/api/auth/${id}`)
+                .set('Authorization', `Bearer ${token}`)
+                .send({
+                email: 'changedEmail@gmail.com'
+                });
         });
 
-        test("should return status 200 OK", () => {
-            expect(res.status).toBe(201);
-        });   
-    })
+        test("Should return status 201", ()=> {
+            expect(res.status).toBe(201)
+        })
+        
+    });
 
     describe("Delete /api/auth/:id", () => {
-        let res = {};
         beforeAll(async () => {
-            await request(server).post("/api/auth/register")
-                            .send(testUser);
-            res = await request(server).del(`/api/auth/:${1}`);
+           
+            res = await request(server)
+                .delete(`/api/auth/${id}`);
         });
 
         test("should return status 200 OK", () => {
             expect(res.status).toBe(200);
-        });   
+        }); 
+         
     })
 
     describe("Get /api/auth/search", () => {
@@ -105,7 +110,8 @@ describe("Auth Router", () => {
 
         test("should return status 200 OK", () => {
             expect(res.status).toBe(201);
-        });   
+        });  
+
     })
 
 
