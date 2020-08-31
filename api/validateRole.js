@@ -6,7 +6,19 @@
 module.exports = {
     admin: (req, res, next) => {
         const role = req.jwt.role;
-    if (role == "Admin"){
+    if (role == "Admin" ){
+       next()
+    } else {
+        res.status(401).json({ message: "You cannot access this function"})
+    }},
+
+    volunteer: (req, res, next) => {   
+        next();
+    },
+
+    taskGet: (req, res, next) => {
+        const role = req.jwt.role;
+    if (role == "Admin" || "Volunteer" ){
        next()
     } else {
         res.status(401).json({ message: "You cannot access this function"})

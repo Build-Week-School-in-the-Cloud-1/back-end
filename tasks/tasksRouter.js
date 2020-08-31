@@ -6,7 +6,7 @@ const router = require("express").Router();
 const TM = require("./tasksModel.js");
 const validate = require("../api/validateRole");
 
-router.get('/', validate.admin,(req,res)=> {
+router.get('/', validate.taskGet,(req,res)=> {
     TM.findAll()
         .then(tasks =>
             res.status(201).json(tasks))
